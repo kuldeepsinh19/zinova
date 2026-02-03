@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model with credit balance
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  passwordHash  String
+  creditBalance Int      @default(20) // 20 free credits for new users
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  transactions      Transaction[]
+  imageGenerations  ImageGeneration[]
+  businessInquiries BusinessInquiry[]
+
+  @@index([email])
+  @@map("users")
+}
+
+// Transaction model for credit purchases and deductions
+model Transaction {
+  id                String   @id @default(cuid())
+  userId            String
+  type              String   // 'CREDIT_PURCHASE' | 'CREDIT_DEDUCTION' | 'CREDIT_REFUND'
+  amount            Int      // Credits amount
+  paymentAmount     Decimal? @db.Decimal(10, 2) // Actual money paid (for purchases)
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  status            String   // 'PENDING' | 'COMPLETED' | 'FAILED'
+  metadata          Json?    // Flexible field for additional data
+  createdAt         DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("transactions")
+}
+
+// Image generation tracking
+model ImageGeneration {
+  id             String   @id @default(cuid())
+  userId         String
+  inputImageUrl  String
+  outputImageUrl String?
+  style          String   // 'trendy' | 'professional' | 'artistic' | 'minimal' | 'vibrant'
+  creditsUsed    Int
+  status         String   // 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED'
+  aiProvider     String   @default("gemini")
+  errorMessage   String?  @db.Text
+  metadata       Json?    // AI-specific data (processing time, model version, etc.)
+  createdAt      DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("image_generations")
+}
+
+// Business inquiry form submissions
+model BusinessInquiry {
+  id           String   @id @default(cuid())
+  userId       String?  // Optional - can be submitted by non-registered users
+  businessName String
+  productType  String
+  requirements String   @db.Text
+  budget       String
+  email        String
+  phone        String?
+  status       String   @default("NEW") // 'NEW' | 'CONTACTED' | 'CONVERTED' | 'CLOSED'
+  createdAt    DateTime @default(now())
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("business_inquiries")
+}
+
+// Portfolio items (hardcoded content for MVP)
+model PortfolioItem {
+  id          String   @id @default(cuid())
+  title       String
+  category    String   // 'skincare' | 'food' | 'fashion' | 'general'
+  imageUrl    String
+  videoUrl    String?
+  description String?  @db.Text
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@index([category])
+  @@index([isActive])
+  @@index([order])
+  @@map("portfolio_items")
+}
