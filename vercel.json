@@ -1,0 +1,14 @@
+{
+    "framework": "nextjs",
+    "buildCommand": "npm run build",
+    "installCommand": "npm install",
+    "outputDirectory": ".next",
+    "regions": [
+        "iad1"
+    ],
+    "functions": {
+        "app/api/**/route.ts": {
+            "runtime": "nodejs18.x"
+        }
+    }
+}
