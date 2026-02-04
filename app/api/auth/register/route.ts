@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { RegisterUserUseCase } from "@application/UseCases/User/RegisterUser";
 import { RepositoryFactory } from "@infrastructure/Persistence/RepositoryFactory";
-import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@infrastructure/Services/ServerSupabaseAuthService";
 import { RegisterUserDTOSchema } from "@application/DTOs/AuthDTOs";
 
 /**
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     // 2. Get dependencies
     const userRepository = RepositoryFactory.getUserRepository();
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
 
     // 3. Execute use case
     const useCase = new RegisterUserUseCase(userRepository, authService);

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { GetUserProfileUseCase } from "@application/UseCases/User/GetUserProfile";
 import { RepositoryFactory } from "@infrastructure/Persistence/RepositoryFactory";
-import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@infrastructure/Services/ServerSupabaseAuthService";
 
 /**
  * GET /api/user/profile
@@ -12,7 +12,7 @@ import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthServic
 export async function GET(request: Request) {
   try {
     // 1. Get current session
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
     const session = await authService.getSession();
 
     if (!session) {

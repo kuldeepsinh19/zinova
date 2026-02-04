@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GetTransactionHistory } from "@/src/Application/UseCases/Credits/GetTransactionHistory";
 import { RepositoryFactory } from "@/src/Infrastructure/Persistence/RepositoryFactory";
-import { SupabaseAuthService } from "@/src/Infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@/src/Infrastructure/Services/ServerSupabaseAuthService";
 
 export async function GET(req: NextRequest) {
   try {
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
     const user = await authService.getUser(req);
 
     if (!user) {

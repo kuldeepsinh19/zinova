@@ -3,11 +3,11 @@ import { verifyPaymentSchema } from "@/src/Application/DTOs/VerifyPaymentDTO";
 import { VerifyPayment } from "@/src/Application/UseCases/Credits/VerifyPayment";
 import { RazorpayService } from "@/src/Infrastructure/Services/RazorpayService";
 import { RepositoryFactory } from "@/src/Infrastructure/Persistence/RepositoryFactory";
-import { SupabaseAuthService } from "@/src/Infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@/src/Infrastructure/Services/ServerSupabaseAuthService";
 
 export async function POST(req: NextRequest) {
   try {
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
     const user = await authService.getUser(req);
 
     if (!user) {

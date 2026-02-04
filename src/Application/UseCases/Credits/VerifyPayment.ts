@@ -1,5 +1,5 @@
 import { ITransactionRepository } from "../../../Domain/Repositories/ITransactionRepository";
-import { IUserRepository } from "../../../Domain/Repositories/IUserRepository";
+import { IUserRepository } from "../../../Domain/Interfaces/IUserRepository";
 import { IPaymentGateway } from "../../../Domain/Interfaces/IPaymentGateway";
 import { VerifyPaymentDTO } from "../../DTOs/VerifyPaymentDTO";
 import { Transaction } from "../../../Domain/Entities/Transaction";
@@ -23,7 +23,7 @@ export class VerifyPayment {
     if (transaction.status === "COMPLETED") {
       // Idempotency: already processed
       const user = await this.userRepo.findById(transaction.userId);
-      return { success: true, newBalance: user ? user.credits : 0 };
+      return { success: true, newBalance: user ? user.creditBalance : 0 };
     }
 
     // 2. Verify signature with payment gateway
@@ -60,14 +60,17 @@ export class VerifyPayment {
     await this.transactionRepo.update(updatedTransaction);
 
     // 4. Add credits to user
-    await this.userRepo.addCredits(transaction.userId, transaction.amount);
-
-    // 5. Get updated user balance
     const user = await this.userRepo.findById(transaction.userId);
+    if (!user) {
+      throw new Error("User not found for transaction");
+    }
+
+    user.addCredits(transaction.amount);
+    await this.userRepo.update(user);
 
     return {
       success: true,
-      newBalance: user ? user.credits : 0,
+      newBalance: user.creditBalance,
     };
   }
 }

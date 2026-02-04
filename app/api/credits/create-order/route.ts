@@ -3,7 +3,7 @@ import { createOrderSchema } from "@/src/Application/DTOs/CreateOrderDTO";
 import { CreateCreditOrder } from "@/src/Application/UseCases/Credits/CreateCreditOrder";
 import { RazorpayService } from "@/src/Infrastructure/Services/RazorpayService";
 import { RepositoryFactory } from "@/src/Infrastructure/Persistence/RepositoryFactory";
-import { SupabaseAuthService } from "@/src/Infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@/src/Infrastructure/Services/ServerSupabaseAuthService";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     // In Phase 1 we set cookies.
     // Let's use SupabaseAuthService to get user.
 
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
     const user = await authService.getUser(req);
 
     if (!user) {

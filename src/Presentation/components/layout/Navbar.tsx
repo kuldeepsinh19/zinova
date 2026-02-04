@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { SupabaseAuthService } from "@/src/Infrastructure/Services/SupabaseAuthService";
+import { ClientSupabaseAuthService } from "@/src/Infrastructure/Services/ClientSupabaseAuthService";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const authService = new SupabaseAuthService();
+      const authService = new ClientSupabaseAuthService();
       const session = await authService.getSession();
       setUser(session ? session.userId : null);
     };
@@ -21,7 +21,7 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
-    const authService = new SupabaseAuthService();
+    const authService = new ClientSupabaseAuthService();
     await authService.signOut();
     router.push("/login");
     router.refresh();

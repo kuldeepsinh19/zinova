@@ -21,7 +21,9 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
-    "playwright:install": "playwright install"
+    "test:e2e:debug": "playwright test --debug",
+    "playwright:install": "playwright install",
+    "postinstall": "cd src/Infrastructure/Database && npx prisma generate"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",

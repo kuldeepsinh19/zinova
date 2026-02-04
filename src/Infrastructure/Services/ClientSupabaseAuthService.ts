@@ -1,5 +1,4 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createBrowserClient } from "@supabase/ssr";
 import {
   IAuthService,
   AuthResult,
@@ -7,12 +6,12 @@ import {
 } from "@application/UseCases/User/LoginUser";
 
 /**
- * Supabase Auth Service
+ * Client-Side Supabase Auth Service
  *
- * Implements IAuthService using Supabase Auth.
- * This can be swapped for Firebase, Auth0, or any other auth provider.
+ * Implements IAuthService using Supabase Auth for the Browser.
+ * Use this service in Client Components ("use client").
  */
-export class SupabaseAuthService implements IAuthService {
+export class ClientSupabaseAuthService implements IAuthService {
   private supabase;
 
   constructor() {
@@ -23,29 +22,7 @@ export class SupabaseAuthService implements IAuthService {
       throw new Error("Supabase environment variables not configured");
     }
 
-    const cookieStore = cookies();
-
-    this.supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
-      cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
-        },
-        set(name: string, value: string, options: any) {
-          try {
-            cookieStore.set({ name, value, ...options });
-          } catch (error) {
-            // Ignore errors in route handlers
-          }
-        },
-        remove(name: string, options: any) {
-          try {
-            cookieStore.set({ name, value: "", ...options });
-          } catch (error) {
-            // Ignore errors in route handlers
-          }
-        },
-      },
-    });
+    this.supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
   }
 
   /**
@@ -240,7 +217,7 @@ export class SupabaseAuthService implements IAuthService {
    * Get current user
    * Validates the token and returns the user object
    */
-  async getUser(req?: any): Promise<{ id: string; email?: string } | null> {
+  async getUser(): Promise<{ id: string; email?: string } | null> {
     const {
       data: { user },
     } = await this.supabase.auth.getUser();

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@infrastructure/Services/ServerSupabaseAuthService";
 
 /**
  * POST /api/auth/logout
@@ -8,7 +8,7 @@ import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthServic
  */
 export async function POST(request: Request) {
   try {
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
     await authService.signOut();
 
     return NextResponse.json(

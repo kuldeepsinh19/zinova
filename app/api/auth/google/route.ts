@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthService";
+import { ServerSupabaseAuthService } from "@infrastructure/Services/ServerSupabaseAuthService";
 
 /**
  * POST /api/auth/google
@@ -9,7 +9,7 @@ import { SupabaseAuthService } from "@infrastructure/Services/SupabaseAuthServic
  */
 export async function POST(request: Request) {
   try {
-    const authService = new SupabaseAuthService();
+    const authService = new ServerSupabaseAuthService();
     const result = await authService.signInWithGoogle();
 
     if (!result.success) {

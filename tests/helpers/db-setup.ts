@@ -2,7 +2,7 @@
  * Database setup and teardown utilities for integration tests
  */
 
-import { PrismaClient } from ".prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 let prisma: PrismaClient;
 
@@ -76,7 +76,7 @@ export async function runInTransaction<T>(
 ): Promise<T> {
   const prisma = getPrismaClient();
 
-  return await prisma.$transaction(async (tx: PrismaClient) => {
-    return await callback(tx);
+  return await prisma.$transaction(async (tx) => {
+    return await callback(tx as unknown as PrismaClient);
   });
 }
