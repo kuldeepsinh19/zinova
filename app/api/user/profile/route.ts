@@ -9,6 +9,8 @@ import { ServerSupabaseAuthService } from "@infrastructure/Services/ServerSupaba
  * Get current user's profile information.
  * Requires authentication.
  */
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   try {
     // 1. Get current session

@@ -4,6 +4,8 @@ import { createServerClient } from "@supabase/ssr";
 import { RepositoryFactory } from "@infrastructure/Persistence/RepositoryFactory";
 import { User } from "@domain/Entities/User";
 
+export const dynamic = "force-dynamic";
+
 /**
  * GET /api/auth/callback
  *

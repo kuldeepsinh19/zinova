@@ -3,6 +3,8 @@ import { GetTransactionHistory } from "@/src/Application/UseCases/Credits/GetTra
 import { RepositoryFactory } from "@/src/Infrastructure/Persistence/RepositoryFactory";
 import { ServerSupabaseAuthService } from "@/src/Infrastructure/Services/ServerSupabaseAuthService";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const authService = new ServerSupabaseAuthService();
