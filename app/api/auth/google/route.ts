@@ -22,11 +22,33 @@ export async function POST(request: Request) {
       );
     }
 
+    // Determine the base URL
+    let baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+
+    if (!baseUrl) {
+      if (process.env.VERCEL_URL) {
+        baseUrl = `https://${process.env.VERCEL_URL}`;
+      } else {
+        // Fallback for local development if variable is missing
+        const host = request.headers.get("host") || "localhost:3000";
+        const protocol = host.includes("localhost") ? "http" : "https";
+        baseUrl = `${protocol}://${host}`;
+      }
+    }
+
+    // Ensure no trailing slash
+    baseUrl = baseUrl.replace(/\/$/, "");
+
+    console.log(
+      "🔵 Initiating Google OAuth with redirect to:",
+      `${baseUrl}/auth/callback`,
+    );
+
     // Get the OAuth URL from Supabase
     const { data } = await authService.getClient().auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+        redirectTo: `${baseUrl}/auth/callback`,
       },
     });
 

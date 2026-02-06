@@ -212,7 +212,10 @@ export class ServerSupabaseAuthService implements IAuthService {
       const { data, error } = await this.supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+          redirectTo: `${
+            process.env.NEXT_PUBLIC_APP_URL ||
+            (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "")
+          }/auth/callback`,
         },
       });
 
