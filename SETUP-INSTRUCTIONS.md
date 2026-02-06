@@ -16,7 +16,7 @@
 2. **Sign up** or log in
 3. **Click** "New Project"
 4. **Fill in**:
-   - Name: `ceratlyin`
+   - Name: `zinnova`
    - Database Password: (create a strong password - save it!)
    - Region: Choose closest to India
    - Pricing Plan: **Free**
@@ -47,6 +47,7 @@
 ### Step 3: Razorpay (Optional - Can add later)
 
 You mentioned you'll get this soon. When ready:
+
 1. Go to [https://dashboard.razorpay.com/app/keys](https://dashboard.razorpay.com/app/keys)
 2. Get Key ID and Key Secret
 3. Add to `.env.local`
@@ -90,6 +91,7 @@ NODE_ENV="development"
 ## ⏸️ Waiting for You
 
 I've set everything up and am waiting for you to:
+
 1. Create Supabase account
 2. Get API keys
 3. Fill in `.env.local`

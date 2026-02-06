@@ -91,7 +91,7 @@ export class RepositoryFactory {
   // Just change this ONE line!
   static getUserRepository(): IUserRepository {
     const client = getMongoClient();
-    return new MongoUserRepository(client.db("ceratlyin")); // ← Swapped!
+    return new MongoUserRepository(client.db("zinnova")); // ← Swapped!
   }
 }
 ```

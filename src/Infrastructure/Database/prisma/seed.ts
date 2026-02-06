@@ -65,10 +65,10 @@ async function main() {
 
   // Create a test user (for development only)
   const testUser = await prisma.user.upsert({
-    where: { email: "test@ceratlyin.com" },
+    where: { email: "test@zinnova.com" },
     update: {},
     create: {
-      email: "test@ceratlyin.com",
+      email: "test@zinnova.com",
       name: "Test User",
       passwordHash: "hashed_password_here", // In production, use bcrypt
       creditBalance: 100, // Give test user extra credits

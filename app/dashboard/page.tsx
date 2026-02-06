@@ -84,7 +84,7 @@ export default function DashboardPage() {
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-900">
-            <span className="text-blue-600">Ceratlyin</span> Dashboard
+            <span className="text-blue-600">Zinnova</span> Dashboard
           </h1>
           <button
             onClick={handleLogout}

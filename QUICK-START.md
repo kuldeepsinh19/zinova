@@ -1,8 +1,8 @@
-# Ceratlyin - Quick Start Guide
+# Zinnova - Quick Start Guide
 
 ## 🚀 Getting Started
 
-Follow these steps to set up and run the ceratlyin project locally.
+Follow these steps to set up and run the zinnova project locally.
 
 ---
 
@@ -18,7 +18,7 @@ Follow these steps to set up and run the ceratlyin project locally.
 ## Step 1: Install Dependencies
 
 ```bash
-cd /home/av33/Documents/ceratlyin
+cd /home/av33/Documents/zinnova
 pnpm install
 ```
 
@@ -182,7 +182,7 @@ pnpm test
 ## Project Structure
 
 ```
-ceratlyin/
+zinnova/
 ├── src/
 │   ├── Domain/              # Business logic (database-agnostic)
 │   ├── Application/         # Use cases

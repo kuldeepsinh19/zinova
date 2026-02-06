@@ -16,7 +16,7 @@ export function getPrismaClient(): PrismaClient {
         db: {
           url:
             process.env.DATABASE_URL ||
-            "postgresql://postgres:postgres@localhost:5432/ceratlyin_test",
+            "postgresql://postgres:postgres@localhost:5432/zinnova_test",
         },
       },
     });

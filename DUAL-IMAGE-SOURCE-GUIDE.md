@@ -49,7 +49,7 @@ graph TD
 
 ### Feature Flag Configuration
 
-**File:** [`src/config/portfolio.config.ts`](file:///home/av33/Documents/ceratlyin/src/config/portfolio.config.ts)
+**File:** [`src/config/portfolio.config.ts`](file:///home/av33/Documents/zinnova/src/config/portfolio.config.ts)
 
 ```typescript
 export const PORTFOLIO_CONFIG = {

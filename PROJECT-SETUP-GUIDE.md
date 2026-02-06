@@ -1,8 +1,8 @@
-# Ceratlyin - Project Setup Guide
+# Zinnova - Project Setup Guide
 
 ## Overview
 
-This guide sets up the ceratlyin project with **Clean Architecture** and **database abstraction** to ensure you can easily swap database providers in the future.
+This guide sets up the zinnova project with **Clean Architecture** and **database abstraction** to ensure you can easily swap database providers in the future.
 
 **Key Principle**: Your business logic will NEVER depend on Supabase or Prisma directly. They are just implementation details that can be replaced.
 
@@ -50,7 +50,7 @@ export class MongoUserRepository implements IUserRepository {
 ### 1.1 Create Project
 
 ```bash
-cd /home/av33/Documents/ceratlyin
+cd /home/av33/Documents/zinnova
 npx create-next-app@latest . --typescript --tailwind --app --no-src-dir --import-alias "@/*"
 ```
 
@@ -695,7 +695,7 @@ npx ts-node src/Infrastructure/Database/test-connection.ts
 ### 📁 Project Structure Created
 
 ```
-ceratlyin/
+zinnova/
 ├── src/
 │   ├── Domain/              # ✅ Database-agnostic
 │   │   ├── Entities/

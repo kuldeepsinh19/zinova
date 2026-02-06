@@ -1,6 +1,6 @@
-# TDD Workflow Guide for Ceratlyin
+# TDD Workflow Guide for Zinnova
 
-**Test-Driven Development (TDD) workflow for the Ceratlyin project using 100% free, open-source tools.**
+**Test-Driven Development (TDD) workflow for the Zinnova project using 100% free, open-source tools.**
 
 ---
 

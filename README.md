@@ -1,4 +1,4 @@
-# Ceratlyin
+# Zinnova
 
 AI-powered marketing platform for Indian startups. Generate professional marketing visuals at the lowest cost.
 

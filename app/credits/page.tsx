@@ -37,7 +37,7 @@ export default function CreditsPage() {
         key: keyId,
         amount: amount,
         currency: currency,
-        name: "Ceratlyin AI",
+        name: "Zinnova AI",
         description: `Credits Purchase - ${pkg.name} Pack`,
         order_id: orderId,
         handler: async function (response: any) {
