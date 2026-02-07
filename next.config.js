@@ -14,6 +14,10 @@ const nextConfig = {
   reactStrictMode: true,
   // Optimize for production
   swcMinify: true,
+  // Exclude BMAD folders from build
+  outputFileTracingExcludes: {
+    "*": ["./_bmad/**", "./_bmad-output/**", "./.agent/**"],
+  },
 };
 
 module.exports = nextConfig;

@@ -43,6 +43,7 @@ src/Infrastructure/Database/prisma/migrations/
 
 # BMAD files
 .agent/
+_bmad/
 _bmad-output/
 credentials/
 *service-account*.json
