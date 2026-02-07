@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Navbar from "@/src/Presentation/components/layout/Navbar";
+import Footer from "@/src/Presentation/components/layout/Footer";
 import CategoryFilter from "@/src/Presentation/components/portfolio/CategoryFilter";
 import PortfolioGrid from "@/src/Presentation/components/portfolio/PortfolioGrid";
 
@@ -66,21 +68,24 @@ export default function PortfolioPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16">
-        <div className="container mx-auto px-4">
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading portfolio...</p>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16">
-        <div className="container mx-auto px-4">
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="text-red-600 mb-4">
               <svg
@@ -103,59 +108,67 @@ export default function PortfolioPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Portfolio
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our AI-generated marketing content across different
-            industries. Professional quality at a fraction of traditional costs.
-          </p>
-        </div>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+      <Navbar />
 
-        {/* Category Filter */}
-        <CategoryFilter
-          categories={categories}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-        />
+      <main className="flex-1 py-12 sm:py-16">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Our Portfolio
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Explore our AI-generated marketing content across different
+              industries. Professional quality at a fraction of traditional
+              costs.
+            </p>
+          </div>
 
-        {/* Portfolio Grid */}
-        <PortfolioGrid items={filteredItems} />
+          {/* Category Filter */}
+          <CategoryFilter
+            categories={categories}
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+          />
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Ready to Get Started?
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Get professional AI-generated marketing content for your business
-            starting at just ₹500 per graphic.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/register"
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-            >
-              Sign Up Free
-            </a>
-            <a
-              href="/dashboard"
-              className="px-8 py-3 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
-            >
-              View Dashboard
-            </a>
+          {/* Portfolio Grid */}
+          <PortfolioGrid items={filteredItems} />
+
+          {/* CTA Section */}
+          <div className="mt-16 text-center bg-white rounded-2xl shadow-lg p-8 max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Ready to Get Started?
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Get professional AI-generated marketing content for your business
+              starting at just ₹500 per graphic.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/ai-studio"
+                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-sm"
+              >
+                Try AI Studio Free
+              </a>
+              <a
+                href="/contact"
+                className="px-8 py-3 bg-gray-100 text-gray-800 rounded-xl font-semibold hover:bg-gray-200 transition-colors"
+              >
+                Get Custom Quote
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
