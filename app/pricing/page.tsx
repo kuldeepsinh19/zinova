@@ -100,7 +100,7 @@ export default function PricingPage() {
                 Credit Packages
               </h2>
               <p className="text-gray-600"> 
-                20 Credits = 1 AI Image Generation  ₹1 = 1 Credit
+                20 Credits = 1 AI Image Generation ₹1 = 1 Credit
               </p>
             </div>
 
